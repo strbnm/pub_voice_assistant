@@ -1,0 +1,4 @@
+{
+      "errors": "Пользователь не авторизован!",
+      "message": "No permission -- see authorization schemes"
+}

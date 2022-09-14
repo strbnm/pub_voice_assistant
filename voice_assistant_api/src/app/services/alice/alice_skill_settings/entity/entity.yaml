@@ -1,0 +1,137 @@
+entity MediaType:
+    values:
+        movie:
+            %lemma
+            фильм
+            кино
+            кинопроизведение
+            мультик
+            мультфильм
+            анимация
+            мульт
+        tv_show:
+            %lemma
+            сериал
+            шоу
+entity PersonType:
+    values:
+        actor:
+            %lemma
+            актер
+            актёр
+            исполнитель
+            участник
+            актерский состав
+        writer:
+            %lemma
+            сценарист
+            автор сценария
+        director:
+            %lemma
+            директор
+            режиссер
+entity GenreType:
+    values:
+        Comedy:
+            %lemma
+            комедия
+        Drama:
+            %lemma
+            драма
+            драматургия
+            драматическое
+        Fantasy:
+            %lemma
+            фэнтези
+            фентезийное
+        Short:
+            %lemma
+            короткометражки
+            короткий метр
+            короткометражное (кино)?
+        Documentary:
+            %lemma
+            документальное (кино)?
+            документалка
+        Talk_Show:
+            %lemma
+            ток шоу
+        Musical:
+            %lemma
+            мьюзикл
+        News:
+            %lemma
+            новости
+            новостное
+        Family:
+            %lemma
+            семейное (кино)?
+        Reality_TV:
+            %lemma
+            реалити шоу
+        War:
+            %lemma
+            военное (кино)?
+            о войне
+        Sci_Fi:
+            %lemma
+            научно-фантастическое (кино)?
+        Music:
+            %lemma
+            музыкальное
+            музыка
+        Sport:
+            %lemma
+            спорт
+            спортивное
+        Biography:
+            %lemma
+            биография
+            биографичное
+        Animation:
+            %lemma
+            анимация
+            мультипликация
+            мультфильм
+            мультик
+            анимационное
+        Thriller:
+            %lemma
+            триллер
+            боевик
+        Adventure:
+            %lemma
+            приключенческое (кино)?
+            приключения
+            путешествия
+        Mystery:
+            %lemma
+            детектив
+            детективное (кино)?
+        Game_Show:
+            %lemma
+            игровое шоу
+        Western:
+            %lemma
+            вестерн
+        Crime:
+            %lemma
+            криминальное (кино)?
+        Action:
+            %lemma
+            боевик
+        Horror:
+            %lemma
+            ужасы
+            хоррор
+        History:
+            %lemma
+            историческое (кино)?
+            хронологическое
+        Romance:
+            %lemma
+            романтическое (кино)?
+            романтика
+            любовный
+            любовь
+            о любви

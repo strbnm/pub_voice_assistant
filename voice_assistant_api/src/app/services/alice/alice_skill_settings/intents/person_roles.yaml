@@ -1,0 +1,36 @@
+slots:
+    type:
+        source: $Type
+        type: PersonType
+    person_name:
+        source: $PersonName
+
+root:
+    ($Show)? $What $Worked $PersonName ($Please)?
+$Show:
+    %lemma
+    скажи
+    покажи
+    подскажи
+    продемонстрируй
+    назови
+$What:
+    %lemma
+    в каких
+    какие
+    в каком качестве
+    в качестве кого
+$Type:
+
+    $MediaType
+$Worked:
+    %lemma
+    выступал
+    участвовал
+    работал
+$PersonName:
+    .+
+$Please:
+    %lemma
+    пожалуйста
+    плиз

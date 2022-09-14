@@ -1,0 +1,107 @@
+@startuml
+'https://plantuml.com/deployment-diagram
+!theme mars
+
+!include <logos/kafka>
+!include <logos/elasticsearch>
+!include <logos/nginx>
+!include <logos/redis>
+!include <logos/postgresql>
+!include <logos/flask>
+!include <logos/gunicorn>
+!include <logos/jaeger>
+!include <logos/django>
+!include <logos/kibana>
+!include <logos/python>
+!include <logos/mongodb>
+!include <logos/rabbitmq>
+
+
+skinparam roundCorner 15
+skinparam actor {
+BorderColor black
+BackgroundColor Gold
+}
+skinparam database {
+BorderColor black
+BackgroundColor Aquamarine
+}
+
+title <size:24>Схема архитектуры сервиса "Голосовой ассистент"
+
+
+'Перечень основных узлов и компонентов диаграммы
+actor/ Manager
+actor User
+
+node "Админ-панель" as admin_panel #aliceblue;line:blue;text:blue {
+
+    component "<$nginx>" as nginx_admin
+    component "<$gunicorn>\nuWSGI web server" as gunicorn {
+    component "<$django>\nmovies-admin" as django
+    }
+    database "<$postgresql>\nmovies_database" as postgres_admin
+
+    nginx_admin <-down-> gunicorn
+    django <-right-> postgres_admin
+}
+
+node "Сервис Async API" as async_api #aliceblue;line:blue;text:blue {
+    component "<$nginx>" as nginx_async
+    component "<$kibana>\nAnalytics\nplatform" as kibana_async
+    component "<$gunicorn>\nuASGI web server" as uvicorn1 {
+    component "<img:FastAPI.png>\nAsync-API" as async_web_api
+    }
+    database "<$redis>\nCache" as redis_async
+    database "<$elasticsearch>\nSearch engine" as elastic_async
+
+
+    kibana_async <-down-> elastic_async
+    async_web_api <-down-> redis_async
+    uvicorn1 <-up-> nginx_async
+    elastic_async <-up-> [async_web_api]
+}
+
+node "Сервис AuthAPI" as auth #aliceblue;line:blue;text:blue {
+    component "<$nginx>" as nginx_auth
+    database "<$redis>\nCache" as redis_auth
+    database "<$postgresql>\nauth_database" as postgres_auth
+    component "<$gunicorn>\ngevent WSGIServer" as gevent {
+    component "<$flask>\n" as auth_api
+    }
+
+    [auth_api] <--> redis_auth
+    auth_api <--> postgres_auth
+    nginx_auth <--> gevent
+}
+
+node "ETL\nPostgresql -> ElasticSearch" #aliceblue;line:blue;text:blue {
+    component "<$python>\n ETL" as etl
+}
+
+node "Backend Voice Assistant" as voice_assistant #palegreen;line:green;text:blue {
+    component "<$nginx>" as nginx_voice_assist
+    component "<$gunicorn>\nuASGI web server" as uvicorn2 {
+    component "<img:FastAPI.png>\nVoice_Assistant_API" as voice_assist_api
+    }
+    database "<$mongodb>\nMongoDB" as mongodb
+
+    uvicorn2 <-up-> nginx_voice_assist
+    [voice_assist_api] <--> mongodb
+}
+
+component "<img:Alisa_Yandex.png>\nЯндекс Алиса" as alice #white;line:green;text:blue
+
+'Связи между компонентами
+User <--> alice
+User <--> nginx_async
+User <--> nginx_auth
+alice <--> nginx_voice_assist
+
+postgres_admin --> etl
+etl -> elastic_async
+async_web_api <-> voice_assist_api
+voice_assist_api <-> auth_api
+
+Manager <--> nginx_admin
+@enduml

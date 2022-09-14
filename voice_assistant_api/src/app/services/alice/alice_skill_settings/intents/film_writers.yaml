@@ -1,0 +1,33 @@
+slots:
+    type:
+        source: $Type
+        type: MediaType
+    film_name:
+        source: $FilmName
+
+root:
+    ($Show)? $Who $Write ($Type)? (для|к)? $FilmName ($Please)?
+    ($Show)? ($Who)? $Write ($Type)? (для|к)? ($FilmName)? ($Please)?
+$Show:
+    %lemma
+    скажи
+    покажи
+    продемонстрируй
+    какие
+$Who:
+    %lemma
+    кто
+    по чьему
+$Write:
+    %lemma
+    написал (сценарий)?
+    создал
+    автор (сценария)?
+$Type:
+    $MediaType
+$FilmName:
+    .+
+$Please:
+    %lemma
+    плиз
+    пожалуйста

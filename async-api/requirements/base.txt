@@ -1,0 +1,2 @@
+elasticsearch[async]==7.16.0
+pydantic==1.9.0

@@ -1,0 +1,122 @@
+{
+  "total": 34,
+  "page": 1,
+  "count": 10,
+  "items": [
+    {
+      "uuid": "0d056b87-27a9-40a8-8b5c-888f797c4e00",
+      "full_name": "Mark Williams",
+      "roles": [
+        "actor"
+      ],
+      "film_ids": [
+        "a2002931-73bc-4331-8381-c62af1ac2c46"
+      ]
+    },
+    {
+      "uuid": "2011cd38-8173-4958-8cf5-ea2628199d08",
+      "full_name": "Mark Lenard",
+      "roles": [
+        "actor"
+      ],
+      "film_ids": [
+        "4090e081-2cad-4016-a8a9-cb15f38db64c"
+      ]
+    },
+    {
+      "uuid": "25423597-4cb0-4e9f-a9aa-86b1fd3aadee",
+      "full_name": "Mark Wahlberg",
+      "roles": [
+        "actor"
+      ],
+      "film_ids": [
+        "496f504e-20fa-4dfd-b4cb-c7c4ef636e07"
+      ]
+    },
+    {
+      "uuid": "26e83050-29ef-4163-a99d-b546cac208f8",
+      "full_name": "Mark Hamill",
+      "roles": [
+        "actor",
+        "director"
+      ],
+      "film_ids": [
+        "025c58cd-1b7e-43be-9ffb-8571a613579b",
+        "0312ed51-8833-413f-bff5-0e139c11264a",
+        "12a8279d-d851-4eb9-9d64-d690455277cc",
+        "134989c3-3b20-4ae7-8092-3e8ad2333d59",
+        "3a28f10a-433e-431c-8e7b-cc3f90af5a41",
+        "3b1d0e70-42e5-4c9b-98cf-2681c420a99b",
+        "3d825f60-9fff-4dfe-b294-1a45fa1e115d",
+        "46f15353-2add-415d-9782-fa9c5b8083d5",
+        "943946ed-4a2b-4c71-8e0b-a58a11bd1323",
+        "b6b8a3b7-1c12-45a8-9da7-4b20db8867df",
+        "c7bd11a4-30bf-4077-a618-97c3e5525427",
+        "cddf9b8f-27f9-4fe9-97cb-9e27d4fe3394",
+        "d4b010a5-2648-4850-b15d-307658020923",
+        "dbb9b244-483b-4592-9194-4938338419bc"
+      ]
+    },
+    {
+      "uuid": "3513bd79-7425-49eb-97cf-7aa03474eb59",
+      "full_name": "Mark Kovalyov",
+      "roles": [
+        "director",
+        "writer"
+      ],
+      "film_ids": [
+        "0b227836-c56b-4c9e-b9d9-28be310e6182"
+      ]
+    },
+    {
+      "uuid": "3b999a71-ccb7-4d0e-83e1-e44d97d51e3a",
+      "full_name": "Mark Chappell",
+      "roles": [
+        "writer"
+      ],
+      "film_ids": [
+        "338b80b5-d21a-4bbe-a465-13fae98f2d35"
+      ]
+    },
+    {
+      "uuid": "44e547b0-6664-4b6b-8f51-f8d994edea77",
+      "full_name": "Mark Meer",
+      "roles": [
+        "actor"
+      ],
+      "film_ids": [
+        "5f600319-10de-49aa-b56f-710edec3ac73"
+      ]
+    },
+    {
+      "uuid": "466c8350-fda7-44b4-a08f-afceaa16bc31",
+      "full_name": "Mark Griffiths",
+      "roles": [
+        "director"
+      ],
+      "film_ids": [
+        "f60241d5-119d-42f8-850a-ea56e8a15cf1"
+      ]
+    },
+    {
+      "uuid": "4df78934-ac20-431d-8d45-6cebff0c9c6a",
+      "full_name": "Mark Aguirre",
+      "roles": [
+        "actor"
+      ],
+      "film_ids": [
+        "e49c02da-e7ee-4da7-bae4-538a5dc7c0f2"
+      ]
+    },
+    {
+      "uuid": "4f9d60e0-f06c-470a-afc7-edb2daa30a09",
+      "full_name": "Mark Calaway",
+      "roles": [
+        "actor"
+      ],
+      "film_ids": [
+        "27b726f2-40e9-4d81-b608-57f7c41bfe54"
+      ]
+    }
+  ]
+}

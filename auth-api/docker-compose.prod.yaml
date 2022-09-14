@@ -1,0 +1,75 @@
+version: "3.8"
+   
+services:
+  db-auth:
+    image: postgres:13.0
+    container_name: db-auth
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    env_file:
+      - ./.env.prod
+    expose:
+      - "5432"
+    networks:
+      - authapi
+
+  nginx-auth:
+    image: nginx:1.21-alpine
+    container_name: nginx-auth
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/configs:/etc/nginx/conf.d:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - auth-api
+    networks:
+      - web-service
+
+  auth-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api.prod
+    container_name: auth_api
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env.prod
+    networks:
+      - authapi
+      - web-service
+  
+  redis:
+    image: redis:6.2.5
+    container_name: redis
+    env_file:
+      - .env.prod
+    volumes:
+      - ./redis/conf/etc:/usr/local/etc/redis
+    expose:
+      - "6379"
+    command:
+      - redis-server
+    networks:
+      - authapi
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    environment:
+      - COLLECTOR_ZIPKIN_HTTP_PORT=9411
+    ports:
+      - "5775:5775/udp"
+      - "6831:6831/udp"
+      - "6832:6832/udp"
+      - "5778:5778"
+      - "16686:16686"
+      - "14268:14268"
+      - "9411:9411"
+    networks:
+      - authapi
+
+networks:
+  authapi:
+  web-service:

@@ -1,0 +1,110 @@
+{
+  "uuid": "74429db7-22b1-4c93-a71d-44b3ee1ffc11",
+  "title": "Star Trek: Generations",
+  "imdb_rating": 7.1,
+  "description": "Captain Jean-Luc Picard and the crew of the Enterprise-D are in the middle of a crisis that has been in effect for more then 80 years. An evil El-Aurian scientist named Tolian Soran has been destroying stars in order to change the path of a space anomaly called the Nexus, a ribbon of energy that acts as a gateway to another reality where all of your hopes and dreams come true. In order to do so, Soran has teamed up with the renegade Klingon faction lead by the Duras sisters, and plans on destroying the Veridian system (inhabited with hundreds of millions of people) in order to cross over into the Nexus.",
+  "genre": [
+    {
+      "uuid": "3d8d9bf5-0d90-4353-88ba-4ccc5d2c07ff",
+      "name": "Action"
+    },
+    {
+      "uuid": "120a21cf-9097-479e-904a-13dd7198c1dd",
+      "name": "Adventure"
+    },
+    {
+      "uuid": "6c162475-c7ed-4461-9184-001ef3d9f26e",
+      "name": "Sci-Fi"
+    }
+  ],
+  "actors": [
+    {
+      "uuid": "807ce9c3-6294-485c-803a-1975066f239f",
+      "name": "James Doohan"
+    },
+    {
+      "uuid": "5bddea2c-8609-499a-a444-77e0142743c0",
+      "name": "Jonathan Frakes"
+    },
+    {
+      "uuid": "fc9f27d2-aaee-46e6-b263-40ec8d2dd355",
+      "name": "LeVar Burton"
+    },
+    {
+      "uuid": "9607e3fa-d667-45d0-abd1-a81709b67896",
+      "name": "Michael Dorn"
+    }
+  ],
+  "writers": [
+    {
+      "uuid": "f00ac91a-b19a-4511-b510-fd05a4a52cbb",
+      "name": "Aaron Malchow"
+    },
+    {
+      "uuid": "1cffdb2e-63a9-4c38-b0d8-f502be700118",
+      "name": "Bing Crowell"
+    },
+    {
+      "uuid": "3644b1e0-a74a-4e86-8b83-a300626e9b06",
+      "name": "Daniel Young"
+    },
+    {
+      "uuid": "0d18e29d-b7eb-4aa5-835b-80c987f9a4c8",
+      "name": "Dan Young"
+    },
+    {
+      "uuid": "9465c887-63b9-4983-afd7-c45eca85ef46",
+      "name": "Erin Fritz"
+    },
+    {
+      "uuid": "eef57db3-e6ce-486a-9721-00b9e1618a10",
+      "name": "Julien Beasely"
+    },
+    {
+      "uuid": "700a3cc7-29f9-41c7-b93e-d2074df3e8cb",
+      "name": "Kyle Brink"
+    },
+    {
+      "uuid": "e7f8dc1d-8b3e-4cb4-a6b3-49013b9c01ec",
+      "name": "Matthew Archambault"
+    },
+    {
+      "uuid": "2d4081ab-8730-42b5-b2f5-2fd7bea3f140",
+      "name": "Michael Bilodeau"
+    },
+    {
+      "uuid": "835d7189-8616-4e98-b201-4d13bf85aef7",
+      "name": "Naren Shankar"
+    },
+    {
+      "uuid": "c3232708-245b-42a4-83a6-f019ebe88df5",
+      "name": "Sam Kolb"
+    },
+    {
+      "uuid": "0af5ee46-0ed6-4771-85e9-510732d2ced3",
+      "name": "Scott Petersen"
+    },
+    {
+      "uuid": "9aa68584-1aea-47c7-8794-a0dc7b217110",
+      "name": "Simon Ffinch"
+    },
+    {
+      "uuid": "5dc17e89-3f68-441e-b072-13ddbbe8ec9c",
+      "name": "Steve Tsai"
+    }
+  ],
+  "directors": [
+    {
+      "uuid": "d71c6ae2-e4c7-44cc-aa10-40eb6946ff88",
+      "name": "Guymond Louie"
+    },
+    {
+      "uuid": "8fdd4370-3274-4e46-9abf-d3a369fa1f0e",
+      "name": "Rick Rasay"
+    },
+    {
+      "uuid": "9aa68584-1aea-47c7-8794-a0dc7b217110",
+      "name": "Simon Ffinch"
+    }
+  ]
+}

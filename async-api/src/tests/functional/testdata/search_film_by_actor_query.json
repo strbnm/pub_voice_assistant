@@ -1,0 +1,22 @@
+{
+  "count": 3,
+  "items": [
+    {
+      "imdb_rating": 7.7,
+      "title": "From 'Star Wars' to 'Jedi': The Making of a Saga",
+      "uuid": "3b1d0e70-42e5-4c9b-98cf-2681c420a99b"
+    },
+    {
+      "imdb_rating": 6.8,
+      "title": "I Wanna Be a Soap Star",
+      "uuid": "69e26130-0aae-496f-99ee-cc4441c327ef"
+    },
+    {
+      "imdb_rating": 8.1,
+      "title": "The Star Dreamer",
+      "uuid": "2c2875d9-4cfc-4c3c-8bea-2f33fad44893"
+    }
+  ],
+  "page": 1,
+  "total": 3
+}

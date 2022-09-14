@@ -1,0 +1,183 @@
+version: "3.8"
+
+services:
+  nginx-voice:
+    image: nginx:1.21-alpine
+    container_name: nginx-voice
+    volumes:
+      - ./voice_assistant_api/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./voice_assistant_api/nginx/configs:/etc/nginx/conf.d:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - voice-api
+    networks:
+      - backend
+
+  voice-api:
+    build:
+      context: ./voice_assistant_api
+      dockerfile: Dockerfile.api.prod
+    container_name: voice-api
+    ports:
+      - "8001:8001"
+    depends_on:
+      - async-api
+    volumes:
+      - ./voice_assistant_api/src/app:/usr/src/app
+    env_file:
+      - ./voice_assistant_api/.env
+    networks:
+      - backend
+
+  db-async:
+    image: postgres:13.0
+    container_name: db-async
+    volumes:
+      - ./async-api/data:/var/lib/postgresql/data
+    env_file:
+      - ./async-api/.env
+    ports:
+      - "15432:5432"
+    networks:
+      - backend
+
+  elasticsearch:
+    image: elasticsearch:7.16.2
+    container_name: elasticsearch
+    environment:
+      - bootstrap.memory_lock=true
+      - cluster.name=docker-cluster
+      - cluster.routing.allocation.disk.threshold_enabled=false
+      - discovery.type=single-node
+      - ES_JAVA_OPTS= -Xms512m -Xmx512m
+      - action.destructive_requires_name=false
+    ulimits:
+      memlock:
+        hard: -1
+        soft: -1
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - backend
+    healthcheck:
+      interval: 30s
+      retries: 10
+      test: curl -s http://localhost:9200/_cluster/health | grep -vq '"status":"red"'
+
+#  kibana:
+#    image: kibana:7.16.2
+#    container_name: kibana
+#    environment:
+#      SERVER_NAME: kibana.local
+#      ELASTICSEARCH_URL: http://elasticsearch:9200
+#      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+#    ports:
+#      - "5601:5601"
+#    networks:
+#      - backend
+#    depends_on:
+#      elasticsearch:
+#        condition: service_healthy
+
+  async-api:
+    build:
+      context: ./async-api
+      dockerfile: Dockerfile.api.dev
+    container_name: fastapi
+    ports:
+      - "8000:8000"
+    depends_on:
+      - elasticsearch
+      - redis
+      - etl
+    volumes:
+      - ./async-api/src/app:/usr/src/app
+    env_file:
+      - ./async-api/.env
+    networks:
+      - backend
+
+  etl:
+    build:
+      context: ./async-api
+      dockerfile: Dockerfile.etl.dev
+    container_name: etl-service
+    depends_on:
+      - elasticsearch
+      - db-async
+    volumes:
+      - ./async-api/postgres_to_es:/usr/src/app/postgres_to_es
+    env_file:
+      - ./async-api/.env
+    networks:
+      - backend
+
+  db-auth:
+    image: postgres:13.0
+    container_name: db-auth
+    volumes:
+      - ./auth-api/data:/var/lib/postgresql/data
+    env_file:
+      - ./auth-api/.env
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+
+  auth-api:
+    build:
+      context: ./auth-api
+      dockerfile: Dockerfile.api.dev
+    container_name: auth_api
+    ports:
+      - "8088:8088"
+    depends_on:
+      - db-auth
+      - redis
+      - jaeger
+    volumes:
+      - ./auth-api/src/app:/usr/src/app
+      - ./auth-api/src/migrations:/usr/src/migrations
+    env_file:
+      - ./auth-api/.env
+    networks:
+      - backend
+
+  redis:
+    image: redis:6.2.5
+    container_name: redis
+    env_file:
+      - ./async-api/.env
+    ports:
+      - "6379:6379"
+    command:
+      - redis-server
+    networks:
+      - backend
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    environment:
+      - COLLECTOR_ZIPKIN_HTTP_PORT=9411
+    ports:
+      - "5775:5775/udp"
+      - "6831:6831/udp"
+      - "6832:6832/udp"
+      - "5778:5778"
+      - "16686:16686"
+      - "14268:14268"
+      - "9411:9411"
+    networks:
+      - backend
+
+volumes:
+  esdata:
+    driver: local
+
+networks:
+  backend:
+

@@ -1,0 +1,6 @@
+{
+  "errors": {
+    "login": "Missing required parameter in the post body"
+  },
+  "message": "Input payload validation failed"
+}

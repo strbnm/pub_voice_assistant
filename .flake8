@@ -1,0 +1,7 @@
+[flake8]
+exclude =
+    .github
+    .venv
+    auth-api/src/migrations
+    docs
+ignore = E501

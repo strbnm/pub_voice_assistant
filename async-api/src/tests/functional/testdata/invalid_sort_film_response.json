@@ -1,0 +1,1 @@
+{"detail":[{"loc":["query","sort"],"msg":"string does not match regex \"-imdb_rating|imdb_rating|_score\"","type":"value_error.str.regex","ctx":{"pattern":"-imdb_rating|imdb_rating|_score"}}]}

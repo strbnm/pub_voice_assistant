@@ -1,0 +1,57 @@
+{
+  "total": 837,
+  "page": 1,
+  "count": 10,
+  "items": [
+    {
+      "uuid": "00e2e781-7af9-4f82-b4e9-14a488a3e184",
+      "title": "Star Wars: X-Wing",
+      "imdb_rating": 8.1
+    },
+    {
+      "uuid": "01ab9e34-4ceb-4337-bb69-68a1b0de46b2",
+      "title": "Axl Rose: The Prettiest Star",
+      "imdb_rating": 6.9
+    },
+    {
+      "uuid": "01cd80e2-5db8-4914-9a80-74f15a3a1a24",
+      "title": "Perry Mason: The Case of the All-Star Assassin",
+      "imdb_rating": 6.9
+    },
+    {
+      "uuid": "01f81c66-d968-4375-bbb0-65103aa214d1",
+      "title": "Carrie Underwood: An All-Star Holiday Special",
+      "imdb_rating": 8.2
+    },
+    {
+      "uuid": "020adfa7-7251-4fb9-b6db-07b60664cb67",
+      "title": "Star Trek",
+      "imdb_rating": 6.9
+    },
+    {
+      "uuid": "025c58cd-1b7e-43be-9ffb-8571a613579b",
+      "title": "Star Wars: Episode VI - Return of the Jedi",
+      "imdb_rating": 8.3
+    },
+    {
+      "uuid": "027ba6c5-d805-402a-addf-484b34292625",
+      "title": "Chasing the Star",
+      "imdb_rating": 3.1
+    },
+    {
+      "uuid": "02c24a84-1667-4f98-b459-f08933befa3d",
+      "title": "Star in the Dust",
+      "imdb_rating": 6.1
+    },
+    {
+      "uuid": "0312ed51-8833-413f-bff5-0e139c11264a",
+      "title": "Star Wars: Episode V - The Empire Strikes Back",
+      "imdb_rating": 8.7
+    },
+    {
+      "uuid": "0352be33-bb3a-455b-80dd-444202dff23d",
+      "title": "A Five Star Life",
+      "imdb_rating": 6.3
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+slots:
+    type:
+        source: $Type
+        type: PersonType
+    person_name:
+        source: $PersonName
+root:
+    ($Show)? (мне)? $Details ($What)? $Type ($PersonName)?;
+$Show:
+    %lemma
+    скажи
+    покажи
+    расскажи
+    продемонстрируй
+    какие
+    назови
+$Details:
+    %lemma
+    подробнее
+    поподробнее
+    детальнее
+    вся информация
+    описание
+    подробно
+    подробности
+$What:
+    %lemma
+    об этом
+    о
+    об
+$Type:
+    $PersonType
+$PersonName:
+    .+

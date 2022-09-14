@@ -1,0 +1,115 @@
+{
+  "count": 10,
+  "items": [
+    {
+      "film_ids": [
+        "bfe61bd9-5dfd-41ca-80ae-8eca998bc29d"
+      ],
+      "full_name": "John Sayles",
+      "roles": [
+        "director",
+        "writer"
+      ],
+      "uuid": "0031feab-8f53-412a-8f53-47098a60ac73"
+    },
+    {
+      "film_ids": [
+        "2a090dde-f688-46fe-a9f4-b781a985275e",
+        "32064806-8196-4037-b758-dd5b5d274b59",
+        "4fdffe40-e77f-4fb2-96ad-47319e3ddd2a",
+        "c4d36327-b330-4506-a63d-fef69d3f2f8a"
+      ],
+      "full_name": "Jennifer Hale",
+      "roles": [
+        "actor"
+      ],
+      "uuid": "00395304-dd52-4c7b-be0d-c2cd7a495684"
+    },
+    {
+      "film_ids": [
+        "26cd91c7-0448-4978-98d6-135ba310d51d"
+      ],
+      "full_name": "Naohisa Inoue",
+      "roles": [
+        "writer"
+      ],
+      "uuid": "0041c8a3-345b-43c8-a615-4d8d62005d4b"
+    },
+    {
+      "film_ids": [
+        "2b301aa8-7c13-4be7-a552-d80c14af7487"
+      ],
+      "full_name": "Marc Blakewill",
+      "roles": [
+        "writer"
+      ],
+      "uuid": "00591223-0fd4-4a5f-89f8-0317eff58c1b"
+    },
+    {
+      "film_ids": [
+        "5f1a4219-b533-489f-8af2-0d2692504857",
+        "e95044a7-1f66-4164-9650-3bf2132d7119"
+      ],
+      "full_name": "Walter C. Miller",
+      "roles": [
+        "director"
+      ],
+      "uuid": "006d10a0-b0ba-4dac-bcf0-1111411c178b"
+    },
+    {
+      "film_ids": [
+        "b2540995-0f91-4db1-99ed-dd7bcb3976d9"
+      ],
+      "full_name": "Andrew Jackson",
+      "roles": [
+        "actor"
+      ],
+      "uuid": "0092a672-4ed5-4838-a6fc-6abf300f6939"
+    },
+    {
+      "film_ids": [
+        "6d22c585-0fca-4653-936e-302094c2adc7"
+      ],
+      "full_name": "Mazzy Star",
+      "roles": [
+        "actor"
+      ],
+      "uuid": "009884ca-5a33-44ba-8fba-495a0055c70d"
+    },
+    {
+      "film_ids": [
+        "3aba7aa0-8930-417c-bf78-3df596c3f062",
+        "9402098b-9a43-459b-85dd-2617813955b8",
+        "96198bec-04bf-4ac7-9538-cbf40d1e25db",
+        "e44b50ef-485f-46ca-973c-4c78c94b6f73"
+      ],
+      "full_name": "Charles Boyd",
+      "roles": [
+        "writer"
+      ],
+      "uuid": "009a900e-b9dc-4cd4-87a7-ca53d1b7dd24"
+    },
+    {
+      "film_ids": [
+        "62bb2379-5017-421a-9030-1f3f7bb51c9c"
+      ],
+      "full_name": "Rick Austin",
+      "roles": [
+        "writer"
+      ],
+      "uuid": "009b7728-949e-4250-b9d0-690d97c6a86b"
+    },
+    {
+      "film_ids": [
+        "2b301aa8-7c13-4be7-a552-d80c14af7487"
+      ],
+      "full_name": "Tony Cooke",
+      "roles": [
+        "writer"
+      ],
+      "uuid": "00a770fc-8964-41fa-9d3b-f6c958c9dddb"
+    }
+  ],
+  "page": 1,
+  "total": 4166
+}

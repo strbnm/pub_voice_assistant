@@ -1,0 +1,137 @@
+version: "3.8"
+   
+services:
+  db-async:
+    image: postgres:13.0
+    container_name: db-async
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    env_file:
+      - ./.env
+    ports:
+      - "8001:5432"
+    networks:
+      - elastic
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.2
+    container_name: elasticsearch
+    environment:
+      - bootstrap.memory_lock=true
+      - cluster.name=docker-cluster
+      - cluster.routing.allocation.disk.threshold_enabled=false
+      - discovery.type=single-node
+      - ES_JAVA_OPTS= -Xms512m -Xmx512m
+      - action.destructive_requires_name=false
+    ulimits:
+      memlock:
+        hard: -1
+        soft: -1
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - elastic
+    healthcheck:
+      interval: 30s
+      retries: 10
+      test: curl -s http://localhost:9200/_cluster/health | grep -vq '"status":"red"'
+  
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.16.2
+    container_name: kibana
+    environment:
+      SERVER_NAME: kibana.local
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    networks:
+      - elastic
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+  
+  nginx-async:
+    image: nginx:1.21-alpine
+    container_name: nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/configs:/etc/nginx/conf.d:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - async-api
+    networks:
+      - web-service
+
+  async-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api.dev
+    container_name: fastapi
+    ports:
+      - "8000:8000"
+    depends_on:
+      - elasticsearch
+      - redis
+    volumes:
+      - ./src/app:/usr/src/app
+    env_file:
+      - .env
+    networks:
+      - elastic
+      - web-service
+  
+  etl:
+    build:
+      context: .
+      dockerfile: Dockerfile.etl.dev
+    container_name: etl-service
+    depends_on:
+      - elasticsearch
+      - db-async
+    volumes:
+      - ./postgres_to_es:/usr/src/app/postgres_to_es
+    env_file:
+      - .env
+    networks:
+      - elastic
+
+  redis:
+    image: redis:6.2.5
+    container_name: redis
+    env_file:
+      - .env
+    expose:
+      - "6379"
+    command:
+      - redis-server
+    networks:
+      - elastic
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    environment:
+      - COLLECTOR_ZIPKIN_HTTP_PORT=9411
+    ports:
+      - "5775:5775/udp"
+      - "6831:6831/udp"
+      - "6832:6832/udp"
+      - "5778:5778"
+      - "16686:16686"
+      - "14268:14268"
+      - "9411:9411"
+    networks:
+      - elastic
+      - web-service
+
+volumes:
+  esdata:
+    driver: local
+
+networks:
+  elastic:
+  web-service:

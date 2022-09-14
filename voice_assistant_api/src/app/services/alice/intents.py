@@ -1,0 +1,39 @@
+TOP_BY_GENRE = 'top_by_genre'
+TOP_BY_RATING = 'top_by_rating'
+NEXT = 'next'
+PREVIOUS = 'previous'
+
+FILM_RATING = 'film_rating'
+FILM_GENRES = 'film_genres'
+FILM_ACTORS = 'film_actors'
+FILM_DIRECTOR = 'film_director'
+FILM_WRITERS = 'film_writers'
+FILM_DESCRIPTION = 'film_description'
+FILM_RELEASE_DATE = 'film_release_date'
+FILM_DURATION = 'film_duration'
+
+PERSON_ROLES = 'person_roles'
+PERSON_FILMS = 'person_films'
+
+HELP = 'YANDEX.HELP'
+WHAT_CAN_YOU_DO = 'YANDEX.WHAT_CAN_YOU_DO'
+DETAILS_FILM = 'details_film'
+DETAILS_PERSON = 'details_person'
+REPEAT = 'YANDEX.REPEAT'
+
+HELP_INTENTS = [HELP, WHAT_CAN_YOU_DO]
+
+TOP_FILM_INTENTS = [TOP_BY_GENRE, TOP_BY_RATING, REPEAT, NEXT, PREVIOUS]
+FILM_INFO_INTENTS = [
+    FILM_RATING,
+    FILM_GENRES,
+    FILM_ACTORS,
+    FILM_DIRECTOR,
+    FILM_WRITERS,
+    FILM_DESCRIPTION,
+    FILM_RELEASE_DATE,
+    FILM_DURATION,
+    DETAILS_FILM,
+    REPEAT,
+]
+PERSON_INFO_INTENTS = [PERSON_ROLES, PERSON_FILMS, DETAILS_PERSON, REPEAT]

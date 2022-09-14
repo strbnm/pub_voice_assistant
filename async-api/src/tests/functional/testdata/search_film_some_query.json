@@ -1,0 +1,57 @@
+{
+  "total": 45,
+  "page": 1,
+  "count": 10,
+  "items": [
+    {
+      "uuid": "9a2b8c98-1989-482a-b3c2-5b278b85b5fa",
+      "title": "Star Wars Forces of Destiny: Volume 3",
+      "imdb_rating": 4.8
+    },
+    {
+      "uuid": "a73e265f-cec8-45e9-b16f-aebb81f0793a",
+      "title": "The Making of a Rock Star",
+      "imdb_rating": 6.8
+    },
+    {
+      "uuid": "5f51ddbc-4966-40a6-9030-262faa3b9b79",
+      "title": "Star Stories",
+      "imdb_rating": 7.4
+    },
+    {
+      "uuid": "f09581c8-f364-4673-836e-ef584e8ebcb7",
+      "title": "Elvis All-Star Tribute",
+      "imdb_rating": 7.3
+    },
+    {
+      "uuid": "a9b57067-b910-47b8-bb83-3169429c84e1",
+      "title": "All Star Comedy Jam",
+      "imdb_rating": 7.5
+    },
+    {
+      "uuid": "724e18bf-e943-442d-a517-fa057ef0ee62",
+      "title": "Why Can't I Be a Movie Star?",
+      "imdb_rating": 6.8
+    },
+    {
+      "uuid": "5a831afc-216f-4085-8a77-5c6f1ceb030f",
+      "title": "The Yellow Star: The Persecution of the Jews in Europe - 1933-1945",
+      "imdb_rating": 7
+    },
+    {
+      "uuid": "112e55fb-d79a-4f5c-b3bf-a3705f1246d9",
+      "title": "Star Quality: Bon Voyage",
+      "imdb_rating": 7.9
+    },
+    {
+      "uuid": "3aba7aa0-8930-417c-bf78-3df596c3f062",
+      "title": "Star Wars: The Old Republic",
+      "imdb_rating": 8.7
+    },
+    {
+      "uuid": "6ed3a1f3-7259-4773-a44a-29932d814fdf",
+      "title": "Star Maidens",
+      "imdb_rating": 6.5
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "detail": [
+    {
+      "loc": [
+        "query",
+        "q"
+      ],
+      "msg": "field required",
+      "type": "value_error.missing"
+    },
+    {
+      "loc": [
+        "query",
+        "page"
+      ],
+      "msg": "value is not a valid integer",
+      "type": "type_error.integer"
+    },
+    {
+      "loc": [
+        "query",
+        "limit"
+      ],
+      "msg": "value is not a valid integer",
+      "type": "type_error.integer"
+    }
+  ]
+}

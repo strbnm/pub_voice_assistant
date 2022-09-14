@@ -1,0 +1,42 @@
+{
+  "total": 157,
+  "page": 3,
+  "count": 7,
+  "items": [
+    {
+      "uuid": "07b2a2bb-81b8-418e-89ad-b4fb359c6d9a",
+      "title": "Keiko the Untold Story of the Star of Free Willy",
+      "imdb_rating": 8.1
+    },
+    {
+      "uuid": "2c2875d9-4cfc-4c3c-8bea-2f33fad44893",
+      "title": "The Star Dreamer",
+      "imdb_rating": 8.1
+    },
+    {
+      "uuid": "35d4ecd5-0904-48bc-8989-dc355b86bfcd",
+      "title": "When Star Wars Ruled the World",
+      "imdb_rating": 8.1
+    },
+    {
+      "uuid": "ae890b4e-6716-4077-8f07-a7a77d9b5543",
+      "title": "The Shining Star of Losers Everywhere",
+      "imdb_rating": 8.1
+    },
+    {
+      "uuid": "332d9ee8-d90e-4764-9066-4358ab002137",
+      "title": "The Car's the Star",
+      "imdb_rating": 8
+    },
+    {
+      "uuid": "38c27677-21c8-4dfe-b610-f96a4bb905ed",
+      "title": "Lone Star Law",
+      "imdb_rating": 8
+    },
+    {
+      "uuid": "4df8c0cb-2cbf-4e40-b79c-fb07635775b9",
+      "title": "Star Shaped Scar",
+      "imdb_rating": 8
+    }
+  ]
+}

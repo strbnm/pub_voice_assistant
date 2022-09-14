@@ -1,0 +1,25 @@
+slots:
+    type:
+        source: $Genre
+        type: GenreType
+
+root:
+    ($Show)? (самые)? $Top $Genre (пожалуйста|плиз)?
+$Show:
+    %lemma
+    скажи
+    покажи
+    подскажи
+    продемонстрируй
+    какие
+    назови
+$Top:
+    %lemma
+    топ
+    лучшие
+    крутые
+    айс
+    улётные
+    зэбэст
+$Genre:
+    $GenreType

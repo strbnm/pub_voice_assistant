@@ -1,0 +1,26 @@
+root:
+    [($Show)? $PREVIOUS ($Type)? ($Please)?]
+$Show:
+    %lemma
+    скажи
+    озвучь
+    прочитай
+    выведи
+    покажи
+    продемонстрируй
+    какие
+$PREVIOUS:
+    %lemma
+    предыдущие
+    вернись
+    до этого
+    назад
+    раньше
+$Type:
+    $MediaType
+    %lemma
+    запись
+$Please:
+    %lemma
+    плиз
+    пожалуйста

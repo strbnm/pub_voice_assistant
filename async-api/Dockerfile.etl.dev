@@ -1,0 +1,19 @@
+# syntax=docker/dockerfile:1
+# pull official base image
+FROM python:3.9-slim
+# set work directory
+WORKDIR /usr/src/app
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+# install base dependencies
+RUN pip install --upgrade pip
+COPY requirements/*.txt ./
+RUN pip3 install -r base.txt -r etl.txt
+# copy app files
+COPY ./postgres_to_es /usr/src/app/postgres_to_es
+# set workdir  and environment
+ENV PYTHONPATH=/usr/src/app
+WORKDIR /usr/src/app
+# start ETL service
+CMD python postgres_to_es/main.py

@@ -1,0 +1,57 @@
+{
+  "total": 69,
+  "page": 1,
+  "count": 10,
+  "items": [
+    {
+      "uuid": "01ab9e34-4ceb-4337-bb69-68a1b0de46b2",
+      "title": "Axl Rose: The Prettiest Star",
+      "imdb_rating": 6.9
+    },
+    {
+      "uuid": "01f81c66-d968-4375-bbb0-65103aa214d1",
+      "title": "Carrie Underwood: An All-Star Holiday Special",
+      "imdb_rating": 8.2
+    },
+    {
+      "uuid": "08c9c955-d91f-47aa-a34c-30982e8fdd9d",
+      "title": "Afghan Star",
+      "imdb_rating": 7.3
+    },
+    {
+      "uuid": "0a393c53-5387-4f1e-9200-5a09eb57362a",
+      "title": "Star Academy",
+      "imdb_rating": 3.2
+    },
+    {
+      "uuid": "0ac3a2d6-bc3c-41a3-a4fc-e7b8339879a3",
+      "title": "Afghan Star",
+      "imdb_rating": 7.1
+    },
+    {
+      "uuid": "0d5e1522-cc03-454b-b501-085348206b81",
+      "title": "All-Star Party for Carol Burnett",
+      "imdb_rating": 9.2
+    },
+    {
+      "uuid": "0e662af2-7ed0-45af-845e-ebc90a9d4610",
+      "title": "À la recherche de la nouvelle star",
+      "imdb_rating": 2.7
+    },
+    {
+      "uuid": "0f077655-86d0-480b-ba37-a74bcbd786d6",
+      "title": "Antonio Carlos Jobim: An All-Star Tribute",
+      "imdb_rating": 7.6
+    },
+    {
+      "uuid": "163fa9c6-7604-4b2f-8190-0da8b8a4ba6f",
+      "title": "The Star Maker",
+      "imdb_rating": 6
+    },
+    {
+      "uuid": "17faad49-185d-4dba-88d9-93f4692a6765",
+      "title": "Sinatra 100: An All-Star Grammy Concert",
+      "imdb_rating": 7.2
+    }
+  ]
+}

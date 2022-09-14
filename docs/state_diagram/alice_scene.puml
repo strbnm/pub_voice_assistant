@@ -1,0 +1,68 @@
+@startuml
+'https://plantuml.com/state-diagram
+title <b>Диаграмма состояний сервиса "Голосовой ассистент"
+state Welcome #pink : <b>Начальная сцена\n<b>ассистента
+state TopFilms #palegreen
+state FilmInfo #lightcyan
+state PersonInfo #pink
+state Help #aliceblue : <b>Сцена примеров\n<b>запросов к сервису
+state End <<end>>
+
+[*] --> Welcome : Активация\nнавыка Алисы
+
+Welcome --> Welcome : Приветственная фраза
+Welcome -[#blue,dotted]-> Help : Есть интент\nзапроса помощи
+
+Welcome -[#red,dashed]-> End : Фраза о выходе\nиз навыка
+Welcome -[#red,dashed]-> End : Отсутствие ответа\nот backend > 3 сек
+
+Help --> Help : Озвучивает примеры запросов
+Help -[dashed]-> End : Фраза о выходе\nиз навыка
+
+Welcome -[#red]-> TopFilms : Есть интент запроса\nпо топу фильмов
+TopFilms : <b>Сцена инф-ции о топе фильмов:
+TopFilms : - общий топ-фильмов по рейтингу
+TopFilms : - топ-фильмов по жанру и рейтингу
+
+TopFilms -[#green]-> TopFilms : Озвучивает\nтоп-фильмов
+TopFilms -[#green]-> TopFilms : Опять интент запроса\nпо топу-фильмов
+TopFilms -[#green]-> FilmInfo : Есть интент запроса\nпо конкретному фильму
+TopFilms -[#green]-> PersonInfo : Есть интент запроса\nпо конкретной персоне
+TopFilms -[#blue,dotted]-> Help : Есть интент\nзапроса помощи
+TopFilms -[#green,dashed]-> End : Фраза о выходе\nиз навыка
+TopFilms -[#green,dashed]-> End : Отсутствие ответа\nот backend > 3 сек
+
+Welcome -[#red]-> FilmInfo : Есть интент запроса\nпо конкретному фильму
+FilmInfo : <b>Сцена инф-ции о фильме:
+FilmInfo : - актеры
+FilmInfo : - режиссеры
+FilmInfo : - сценаристы
+FilmInfo : - дата релиза фильма
+FilmInfo : - рейтинг фильма
+FilmInfo : - продолжительность фильма
+FilmInfo : - сюжет фильма
+FilmInfo : - жанр/жанры фильма
+FilmInfo : - подробная инф-ция
+
+FilmInfo -[#blue]-> FilmInfo : Озвучивает\nзапрошенную инфу
+FilmInfo -[#blue]-> FilmInfo : Опять интент запроса\nс инфой по фильмам
+TopFilms <-[#blue]- FilmInfo : Есть интент запроса\nпо топу-фильмов
+FilmInfo -[#blue]-> PersonInfo : Есть интент запроса\nпо конкретной персоне
+FilmInfo -[#blue,dotted]-> Help : Есть интент\nзапроса помощи
+FilmInfo -[#blue,dashed]-> End : Фраза о выходе\nиз навыка
+FilmInfo -[#blue,dashed]-> End : Отсутствие ответа\nот backend > 3 сек
+
+Welcome -[#red]-> PersonInfo : Есть интент запроса\nпо конкретной персоне
+PersonInfo : <b>Сцена инф-ции о персоне:
+PersonInfo : - роли (актер, сценарист, режиссер)
+PersonInfo : - в каких фильмах принимал участие
+PersonInfo : - подробная информация о персоне
+
+PersonInfo -[#darkviolet]-> PersonInfo : Озвучивает\nзапрошенную инфу
+PersonInfo -[#darkviolet]-> PersonInfo : Опять интент запроса\nс инфой по фильмам
+PersonInfo -[#darkviolet,dashed]-> End : Фраза о выходе\nиз навыка
+PersonInfo -[#darkviolet,dashed]-> End : Отсутствие ответа\nот backend > 3 сек
+PersonInfo -[#blue,dotted]-> Help : Есть интент\nзапроса помощи
+PersonInfo -[#darkviolet]-> TopFilms : Есть интент запроса\nпо топу-фильмов
+PersonInfo -[#darkviolet]-> FilmInfo : Есть интент запроса\nпо конкретному фильму
+@enduml

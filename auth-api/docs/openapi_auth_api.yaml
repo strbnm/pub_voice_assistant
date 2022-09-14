@@ -1,0 +1,732 @@
+openapi: 3.0.1
+info:
+  title: Auth API Team8
+  description: 'Описание модели API для сервиса авторизации и аутентификации учебного проекта \"Онлайн - кинотеатр\"'
+  termsOfService: http://swagger.io/terms/
+  contact:
+    name: Auth API Developers Team8
+    email: "strbnm@yandex.ru"
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.3
+servers:
+- url: http://api
+
+tags:
+- name: account
+  description: API для сайта и личного кабинета
+- name: admin
+  description: API для управления ролями и доступами
+
+paths:
+  /v1/signup:
+    post:
+      tags:
+      - account
+      summary: Регистрация пользователя
+      operationId: SignupUserRequest
+      description: Выполняется проверка на уже созданного пользователя и в случае отсутствия регистрируется новый пользователь
+      requestBody:
+        description: 'Логин, e-mail и пароль являются обязательными параметрами.
+                      Длина пароля не менее 8 символов.'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignupUserRequest'
+        required: true
+      responses:
+        201:
+          description: Пользователь создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignupUserResponse'
+        400:
+          description: Отсутствует обязательное поле или недостаточная длина пароля
+          $ref: '#/components/responses/BadRequest'
+        409:
+          description: Пользователь с таким адресом электронной почты уже существует!
+          $ref: '#/components/responses/Conflict'
+        x-codegen-request-body-name: body
+
+  /v1/user/login:
+    post:
+      tags:
+      - account
+      summary: Авторизация пользователя в системе
+      description: Авторизация происходит по email/пароль или access токену
+      operationId: loginUser
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      responses:
+        200:
+          description: Авторизация успешна.
+          headers:
+            X-Rate-Limit:
+              description: допустимое количество подключений в час
+              schema:
+                type: integer
+                format: int32
+            X-Expires-After:
+              description: дата и время истечения токена в UTC
+              schema:
+                type: string
+                format: date-time
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        401:
+          description: Неверное имя пользователя или пароль
+          $ref: '#/components/responses/Unauthorized'
+      x-codegen-request-body-name: body
+
+  /v1/user/logout:
+    post:
+      tags:
+      - account
+      summary: Выход из пользовательской сессии
+      description: ''
+      operationId: logoutUser
+      security:
+        - bearerAuth: []
+      responses:
+        default:
+          description: 'Вы вышли из аккаунта'
+        401:
+          description: Пользователь не авторизован!
+          $ref: '#/components/responses/Unauthorized'
+
+  /v1/user/refresh:
+    post:
+      tags:
+      - account
+      summary: Получение новой пары токенов в обмен на refresh-токен
+      description: ''
+      operationId: refreshToken
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              description: calls per hour allowed by the user
+              schema:
+                type: integer
+                format: int32
+            X-Expires-After:
+              description: date in UTC when token expires
+              schema:
+                type: string
+                format: date-time
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        401:
+          description: Пользователь не авторизован или refresh-токен недействительный!
+          $ref: '#/components/responses/Unauthorized'
+
+  /v1/user/update-password:
+    patch:
+      tags:
+      - account
+      summary: 'Смена пароля пользователем'
+      description: ''
+      operationId: updateUserPassword
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: 'Проверяется соответствие старого пароля текущему и при успешном сравнении
+                       сохраняется новый пароль и осуществляется logout пользователя.'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePassword'
+        required: true
+      responses:
+        default:
+          description: 'Пароль успешно сменен. Авторизуйтесь повторно с новым паролем.'
+        400:
+          description: Отсутствует обязательное поле или недостаточная длина пароля
+          $ref: '#/components/responses/BadRequest'
+        401:
+          description: Пользователь не авторизован!
+          $ref: '#/components/responses/Unauthorized'
+        409:
+          description: Введен неверный старый пароль. Попробуйте еще раз.
+          $ref: '#/components/responses/Conflict'
+      x-codegen-request-body-name: body
+
+  /v1/user/history:
+    get:
+      tags:
+      - account
+      summary: Получение истории посещений
+      description: ''
+      operationId: userHistory
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: page
+          description: Номер страницы
+          schema:
+            type: integer
+        - in: query
+          name: per_page
+          description: Количество записей на странице
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Успешная операция
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Общее количество записей
+                  total_pages:
+                    type: integer
+                    description: Общее количество страниц
+                  prev:
+                    type: integer
+                    nullable: true
+                    description: Номер предыдущей страницы
+                  next:
+                    type: integer
+                    nullable: true
+                    description: Номер следующей страницы
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/History'
+        401:
+          description: Пользователь не авторизован!
+          $ref: '#/components/responses/Unauthorized'
+
+  /v1/roles:
+    get:
+      tags:
+      - admin
+      summary: Просмотр всех ролей
+      description: Получает список всех ролей пользователей в системе
+      operationId: getRoles
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: page
+          description: Номер страницы
+          schema:
+            type: integer
+        - in: query
+          name: per_page
+          description: Количество записей на странице
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Успешная операция
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Общее количество объектов
+                    example: 100
+                  total_pages:
+                    type: integer
+                    description: Общее количество страниц
+                    example: 5
+                  prev:
+                    type: integer
+                    nullable: true
+                    description: Номер предыдущей страницы
+                    example: null
+                  next:
+                    type: integer
+                    nullable: true
+                    description: Номер следующей страницы
+                    example: 2
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Role'
+        403:
+          description: Недостаточно прав. Доступ запрещен.
+          $ref: '#/components/responses/Forbidden'
+
+    post:
+      tags:
+      - admin
+      summary: Создание роли
+      description: Проверяет, существует ли роль и при отсутствии создает новую роль
+      operationId: createRole
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Имя роли
+                description:
+                  type: string
+                  description: Описание роли
+              required:
+                - name
+                - description
+      responses:
+        201:
+          description: Роль создана
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+        400:
+          description: Отсутствует обязательное поле
+          $ref: '#/components/responses/BadRequest'
+        409:
+          description: Роль с таким именем уже существует!
+          $ref: '#/components/responses/Conflict'
+        403:
+          description: Недостаточно прав или системная роль. Доступ запрещен.
+          $ref: '#/components/responses/Forbidden'
+      x-codegen-request-body-name: body
+
+  /v1/roles/{role_id}:
+    parameters:
+      - in: path
+        name: role_id
+        description: Уникальный идентификатор роли
+        required: true
+        schema:
+          type: string
+          format: uuid
+    patch:
+      tags:
+      - admin
+      summary: Изменение роли
+      description: Внесение изменений в имя или описание роли
+      operationId: updateRole
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Имя роли
+                description:
+                  type: string
+                  description: Описание роли
+              required:
+                - name
+                - description
+      responses:
+        200:
+          description: Успешная операция
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+        403:
+          description: Недостаточно прав или системная роль. Доступ запрещен.
+          $ref: '#/components/responses/Forbidden'
+        404:
+          description: Отказано! Роль не может быть удалена!
+          $ref: '#/components/responses/NotFound'
+        409:
+          description: Роль с таким именем уже существует!
+          $ref: '#/components/responses/Conflict'
+      x-codegen-request-body-name: body
+
+    delete:
+      tags:
+      - admin
+      summary: Удаление роли
+      description: Удаление роли из базы данных
+      operationId: Role
+      security:
+        - bearerAuth: []
+      responses:
+        204:
+          description: No  content
+          content: {}
+        403:
+          description: Недостаточно прав или системная роль. Доступ запрещен.
+          $ref: '#/components/responses/Forbidden'
+        404:
+          description: Роль не найдена
+          $ref: '#/components/responses/NotFound'
+
+  /v1/users/{user_id}/roles:
+    get:
+      tags:
+      - admin
+      summary: Список ролей пользователя
+      description: Отображает список ролей назначенных для пользователя
+      operationId: getRoleUser
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: user_id
+          description: Уникальный идентификатор пользователя
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - in: query
+          name: page
+          description: Номер страницы
+          schema:
+            type: integer
+        - in: query
+          name: per_page
+          description: Количество записей на странице
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Успешная операция
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Общее количество записей
+                    example: 100
+                  total_pages:
+                    type: integer
+                    description: Общее количество страниц
+                    example: 5
+                  prev:
+                    type: integer
+                    nullable: true
+                    description: Номер предыдущей страницы
+                    example: null
+                  next:
+                    type: integer
+                    nullable: true
+                    description: Номер следующей страницы
+                    example: 2
+                  results:
+                    type: array
+                    description: Список ролей пользователя
+                    items:
+                      $ref: '#/components/schemas/Role'
+        404:
+          description: Пользователь не найден
+          $ref: '#/components/responses/NotFound'
+        403:
+          description: Недостаточно прав. Доступ запрещен.
+          $ref: '#/components/responses/Forbidden'
+
+  /v1/users/{user_id}/roles/add/{role_id}:
+    put:
+      tags:
+      - admin
+      summary: Назначить пользователю роль (добавить в группу роли)
+      description: Назначает пользователю роль (добавляет пользователя в группу роли)
+      operationId: setRoleUser
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: user_id
+          description: Уникальный идентификатор пользователя
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - in: path
+          name: role_id
+          description: Уникальный идентификатор роли
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        200:
+          description: OK
+          $ref: '#/components/responses/minimalResponse'
+        204:
+          description: Такая роль уже есть у пользователя
+          content: {}
+        404:
+          description: Роль или пользователь не найдены
+          $ref: '#/components/responses/NotFound'
+        403:
+          description: Недостаточно прав. Доступ запрещен.
+          $ref: '#/components/responses/Forbidden'
+
+  /v1/users/{user_id}/roles/revoke/{role_id}:
+
+    delete:
+      tags:
+      - admin
+      summary: Аннулировать пользователю роль (удалить из группы роли)
+      description: Аннулирует пользователю роль (удаляет пользователя в группу роли)
+      operationId: revokeRoleUser
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: user_id
+          description: Уникальный идентификатор пользователя
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - in: path
+          name: role_id
+          description: Уникальный идентификатор роли
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        204:
+          description: No  content
+          content: {}
+        404:
+          description: Роль или пользователь не найдены
+          $ref: '#/components/responses/NotFound'
+        403:
+          description: Недостаточно прав. Доступ запрещен.
+          $ref: '#/components/responses/Forbidden'
+
+components:
+  schemas:
+
+    SignupUserRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          pattern: '[A-Za-z]'
+          description: Никнейм пользователя
+        email:
+          type: string
+          format: email
+          description: Адрес электронной почты
+        first_name:
+          type: string
+          description: Имя пользователя
+        last_name:
+          type: string
+          description: Фамилия пользователя
+        password:
+          type: string
+          format: password
+          pattern: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g
+          description: Пароль
+          minLength: 8
+      required:
+        - username
+        - email
+        - password
+
+    SignupUserResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Уникальный идентификатор пользователя
+        username:
+          type: string
+          description: Никнейм пользователя
+        email:
+          type: string
+          format: email
+          description: Адрес электронной почты
+        first_name:
+          type: string
+          description: Имя пользователя
+        last_name:
+          type: string
+          description: Фамилия пользователя
+        is_active:
+          type: boolean
+          description: Статус учетной записи
+        created_at:
+          type: string
+          format: date-time
+
+    Login:
+      type: object
+      properties:
+        login:
+          type: string
+          format: email
+          description: Логин (e-mail) пользователя
+        password:
+          type: string
+          format: password
+          pattern: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g
+          description: Пароль
+          minLength: 8
+      required:
+        - login
+        - password
+
+    UpdatePassword:
+      type: object
+      properties:
+        old_password:
+          type: string
+          format: password
+          pattern: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g
+          description: Старый пароль
+          minLength: 8
+        new_password:
+          type: string
+          format: password
+          pattern: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g
+          description: Новый пароль
+          minLength: 8
+      required:
+        - old_password
+        - new_password
+
+    Token:
+      type: object
+      properties:
+        token:
+          type: string
+        refresh_token:
+          type: string
+
+    Error:
+      type: object
+      properties:
+        errors:
+          type: string
+        message:
+          type: string
+      required:
+        - errors
+        - message
+
+    History:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Уникальный идентификатор записи в истории посещений
+        login:
+          type: string
+          description: Логин пользователя
+          example: test@example.com
+        timestamp:
+          type: string
+          format: date-time
+          description: Время входа
+        user_agent:
+          type: string
+          description: Пользовательский агент (браузер)
+        ip_addr:
+          type: string
+          oneOf:
+            - format: ipv4
+            - format: ipv6
+        device:
+          type: string
+          description: Устройство
+        platform:
+          type: string
+          description: Операционная система
+
+    Role:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Уникальный идентификатор роли
+        name:
+          type: string
+          description: Имя роли
+        description:
+          type: string
+          description: Описание роли
+        is_active:
+          type: boolean
+          description: Статус доступности роли (доступна / недоступна)
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  responses:
+    minimalResponse:
+      description: "OK"
+
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+    Conflict:
+      description: Resource Already Exist
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+    FailedDependency:
+      description: Failed Dependency
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+    Forbidden:
+      description: Resource modification is prohibited
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"

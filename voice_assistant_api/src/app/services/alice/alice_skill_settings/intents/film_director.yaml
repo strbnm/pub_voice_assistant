@@ -1,0 +1,34 @@
+slots:
+    type:
+        source: $Type
+        type: MediaType
+    film_name:
+        source: $FilmName
+
+root:
+    ($Show)? $Who $Directed ($Type)? $FilmName ($Please)?
+    ($Show)? ($Who)? $Directed $Type ($FilmName)? ($Please)?
+$Show:
+    %lemma
+    скажи
+    покажи
+    продемонстрируй
+    подскажи
+    назови
+$Who:
+    %lemma
+    кто
+$Directed:
+    %lemma
+    снял
+    поставил
+    режиссер
+    режиссёр
+$Type:
+    $MediaType
+$FilmName:
+    .+
+$Please:
+    %lemma
+    плиз
+    пожалуйста

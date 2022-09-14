@@ -1,0 +1,37 @@
+slots:
+    type:
+        source: $Type
+        type: MediaType
+    film_name:
+        source: $FilmName
+
+root:
+    ($Show)? ($What)? (о)? $Description (у|в)? ($Type)? $FilmName ($Please)?
+    ($Show)? ($What)? (о)? $Description (у|в)? ($This)? ($Type)? ($Please)?
+$Show:
+    %lemma
+    скажи
+    покажи
+    подскажи
+    продемонстрируй
+    расскажи
+    какие
+$What:
+    %lemma
+    какой
+$Description:
+    %lemma
+    описание
+    сюжет
+    краткое содержание
+$This:
+    %lemma
+    этого
+$Type:
+    $MediaType
+$FilmName:
+    .+
+$Please:
+    %lemma
+    плиз
+    пожалуйста

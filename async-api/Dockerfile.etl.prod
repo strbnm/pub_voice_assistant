@@ -1,0 +1,35 @@
+# syntax=docker/dockerfile:1
+# pull official base image
+FROM python:3.9-slim
+# set work directory
+WORKDIR /usr/src/app
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+COPY requirements/*.txt ./
+# install dependencies
+RUN pip3 install -r base.txt -r etl.txt
+RUN apt-get update && apt-get install -y --no-install-recommends netcat
+# create directory for the app user
+RUN mkdir -p /home/app
+# create the app user
+RUN addgroup --system app && adduser --system --group app
+# create the appropriate directories
+ENV HOME=/home/app
+ENV APP_HOME=/home/app/etl
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
+# copy entrypoint.prod.sh
+COPY ./entrypoint.etl.prod.sh .
+RUN sed -i 's/\r$//g'  $APP_HOME/entrypoint.etl.prod.sh
+RUN chmod +x  $APP_HOME/entrypoint.etl.prod.sh
+# copy app files
+COPY ./postgres_to_es $APP_HOME/postgres_to_es
+# chown all the files to the app user
+RUN chown -R app:app $APP_HOME
+# change to the app user
+USER app
+# set environment
+ENV PYTHONPATH=$APP_HOME
+# run entrypoint.prod.sh
+ENTRYPOINT ["/home/app/etl/entrypoint.etl.prod.sh"]

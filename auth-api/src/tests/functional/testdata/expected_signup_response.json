@@ -1,0 +1,9 @@
+{
+  "id": "73c2447f-95ce-424c-892a-1ef4eeac712d",
+  "username": "test_signup",
+  "email": "test_signup@example.com",
+  "first_name": "John",
+  "last_name": "Smith",
+  "is_active": true,
+  "created_at": "2022-03-06T08:09:20.860802"
+}

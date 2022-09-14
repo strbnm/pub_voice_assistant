@@ -1,0 +1,57 @@
+{
+  "total": 999,
+  "page": 10,
+  "count": 10,
+  "items": [
+    {
+      "uuid": "163fa9c6-7604-4b2f-8190-0da8b8a4ba6f",
+      "title": "The Star Maker",
+      "imdb_rating": 6
+    },
+    {
+      "uuid": "166338ea-9fae-4806-aefc-1fd890a44903",
+      "title": "Gold Star",
+      "imdb_rating": 7.2
+    },
+    {
+      "uuid": "175beb94-30fb-4786-be98-052009d73541",
+      "title": "Star-Studded Spoof of the New TV Season, G-Rated, with Glamour, Glitter and Gags",
+      "imdb_rating": 7.1
+    },
+    {
+      "uuid": "17bc0cc6-6d9d-4a7c-81b3-4556e1d3ac04",
+      "title": "Five Star",
+      "imdb_rating": 5.7
+    },
+    {
+      "uuid": "17f634cd-9581-4ba1-b40b-89ee058c3f55",
+      "title": "Star Wars: Episode I - Jedi Power Battles",
+      "imdb_rating": 7.1
+    },
+    {
+      "uuid": "17faad49-185d-4dba-88d9-93f4692a6765",
+      "title": "Sinatra 100: An All-Star Grammy Concert",
+      "imdb_rating": 7.2
+    },
+    {
+      "uuid": "181c2b64-4b8e-45b0-8b2e-ea71a2b34285",
+      "title": "Instant Star",
+      "imdb_rating": 7.4
+    },
+    {
+      "uuid": "184eeea3-c91a-43f9-9a8b-d6ab8dfb9bf3",
+      "title": "Jason of Star Command",
+      "imdb_rating": 6.7
+    },
+    {
+      "uuid": "18c21a03-3127-4746-a5f0-4439612f56b7",
+      "title": "Hour of the Star",
+      "imdb_rating": 7.4
+    },
+    {
+      "uuid": "18d17e32-bdcd-429c-9a50-b596c147b336",
+      "title": "Star Wars: Galaxies - Trials of Obi-Wan",
+      "imdb_rating": 6
+    }
+  ]
+}
